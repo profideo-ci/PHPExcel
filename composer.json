@@ -19,7 +19,13 @@
         },
         {
             "name": "Erik Tilt"
-        }
+        },
+	{
+	    "name": "Ibrahima SOW",
+	    "email": "isow@profideo.com",
+            "company": "Profideo",
+	    "role": "Developer"
+	}
     ],
     "require": {
         "php": ">=5.2.0",
