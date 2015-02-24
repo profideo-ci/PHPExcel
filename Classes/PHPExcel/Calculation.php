@@ -70,7 +70,8 @@ class PHPExcel_Calculation {
 	//	Opening bracket
 	const CALCULATION_REGEXP_OPENBRACE	= '\(';
 	//	Function (allow for the old @ symbol that could be used to prefix a function, but we'll ignore it)
-	const CALCULATION_REGEXP_FUNCTION	= '@?([A-Z][A-Z0-9\.]*)[\s]*\(';
+	//const CALCULATION_REGEXP_FUNCTION	= '@?([A-Z][A-Z0-9\.]*)[\s]*\('; //default PHPExcel expression
+    const CALCULATION_REGEXP_FUNCTION	= '@?([A-Za-z\_\-\.][A-Za-z0-9\_\-\.]*)[\s]*\(';
 	//	Cell reference (cell or range of cells, with or without a sheet reference)
 	const CALCULATION_REGEXP_CELLREF	= CALCULATION_REGEXP_CELLREF;
 	//	Named Range of cells
@@ -2933,7 +2934,8 @@ class PHPExcel_Calculation {
 						}
 						$stack->push('Brace', '(');
 					} else {	// it's a var w/ implicit multiplication
-						$output[] = array('type' => 'Value', 'value' => $matches[1], 'reference' => NULL);
+                        return $this->_raiseFormulaError("Formula Error: Unexpected Function " . $matches[1]);
+						//$output[] = array('type' => 'Value', 'value' => $matches[1], 'reference' => NULL);
 					}
 				} elseif (preg_match('/^'.self::CALCULATION_REGEXP_CELLREF.'$/i', $val, $matches)) {
 //					echo 'Element '.$val.' is a Cell reference<br />';
